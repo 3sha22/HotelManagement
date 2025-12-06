@@ -5,6 +5,9 @@
 package com.mycompany.hmsd;
 import java.awt.*;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JMenuItem;
+
 
 /**
  *
@@ -12,18 +15,22 @@ import javax.swing.JPanel;
  */
 public class NewJFrame extends javax.swing.JFrame {
      private JPanel mainPanel;
-    private CardLayout cardLayout;
+   // private CardLayout cardLayout;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(NewJFrame.class.getName());
 
     /**
      * Creates new form NewJFrame
      */
-    public NewJFrame() {
+    public NewJFrame() {//constructor
         initComponents();
         
        setLocationRelativeTo(null);
+       addRightClickMenu();
+       
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,18 +46,15 @@ public class NewJFrame extends javax.swing.JFrame {
         CheckOut = new javax.swing.JPanel();
         ReceiptBilling = new javax.swing.JPanel();
         Revenue = new javax.swing.JPanel();
-        HomePage = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableInfo = new javax.swing.JTable();
+        backHomePage = new javax.swing.JButton();
+        addRoom = new javax.swing.JButton();
+        exitBnt = new javax.swing.JButton();
+        textField1 = new java.awt.TextField();
 
-        javax.swing.GroupLayout ManageRoomLayout = new javax.swing.GroupLayout(ManageRoom);
-        ManageRoom.setLayout(ManageRoomLayout);
-        ManageRoomLayout.setHorizontalGroup(
-            ManageRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        ManageRoomLayout.setVerticalGroup(
-            ManageRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        ManageRoom.setFocusCycleRoot(true);
+        ManageRoom.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         CheckIn.setPreferredSize(new java.awt.Dimension(1200, 700));
 
@@ -103,48 +107,164 @@ public class NewJFrame extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1200, 700));
 
-        HomePage.setPreferredSize(new java.awt.Dimension(1200, 700));
+        tableInfo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
+            }
+        ));
+        jScrollPane1.setViewportView(tableInfo);
 
-        javax.swing.GroupLayout HomePageLayout = new javax.swing.GroupLayout(HomePage);
-        HomePage.setLayout(HomePageLayout);
-        HomePageLayout.setHorizontalGroup(
-            HomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1200, Short.MAX_VALUE)
-        );
-        HomePageLayout.setVerticalGroup(
-            HomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 557, Short.MAX_VALUE)
-        );
+        backHomePage.setText("jButton1");
+        backHomePage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backHomePageActionPerformed(evt);
+            }
+        });
+
+        addRoom.setText("ADD ROOM");
+        addRoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addRoomActionPerformed(evt);
+            }
+        });
+
+        exitBnt.setText("jButton3");
+        exitBnt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitBntActionPerformed(evt);
+            }
+        });
+
+        textField1.setText("textField1");
+        textField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textField1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1212, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(HomePage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(backHomePage))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(addRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
+                .addComponent(exitBnt)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 569, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(HomePage, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(exitBnt)
+                    .addComponent(backHomePage))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void backHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backHomePageActionPerformed
+        // TODO add your handling code here:
+       // new 
+    }//GEN-LAST:event_backHomePageActionPerformed
+
+    private void exitBntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBntActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_exitBntActionPerformed
+
+    private void addRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRoomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addRoomActionPerformed
+
+    private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textField1ActionPerformed
+    private void addRightClickMenu() {
+    // Popup menu
+    JPopupMenu popup = new JPopupMenu();
+
+    JMenuItem editItem = new JMenuItem("Edit");
+    JMenuItem deleteItem = new JMenuItem("Delete");
+
+    popup.add(editItem);
+    popup.add(deleteItem);
+
+    // Mouse listener for right-click
+    tableInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+        @Override
+        public void mousePressed(java.awt.event.MouseEvent e) {
+            showPopup(e);
+        }
+
+        @Override
+        public void mouseReleased(java.awt.event.MouseEvent e) {
+            showPopup(e);
+        }
+
+        private void showPopup(java.awt.event.MouseEvent e) {
+            if (e.isPopupTrigger()) { // Right click
+                int row = tableInfo.rowAtPoint(e.getPoint());
+                tableInfo.setRowSelectionInterval(row, row); // highlight row
+                popup.show(e.getComponent(), e.getX(), e.getY());
+            }
+        }
+    });
+
+    // EDIT ACTION
+    editItem.addActionListener(e -> {
+        int selected = tableInfo.getSelectedRow();
+        if (selected != -1) {
+            System.out.println("Edit row: " + selected);
+            // YOU CAN OPEN A NEW FORM OR EDIT DIALOG HERE
+        }
+    });
+
+    // DELETE ACTION
+    deleteItem.addActionListener(e -> {
+        int selected = tableInfo.getSelectedRow();
+        if (selected != -1) {
+            ((javax.swing.table.DefaultTableModel) tableInfo.getModel()).removeRow(selected);
+        }
+    });
+}
+
     /**
      * @param args the command line arguments
      */
+    
+     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -170,9 +290,14 @@ public class NewJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CheckIn;
     private javax.swing.JPanel CheckOut;
-    private javax.swing.JPanel HomePage;
     private javax.swing.JPanel ManageRoom;
     private javax.swing.JPanel ReceiptBilling;
     private javax.swing.JPanel Revenue;
+    private javax.swing.JButton addRoom;
+    private javax.swing.JButton backHomePage;
+    private javax.swing.JButton exitBnt;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tableInfo;
+    private java.awt.TextField textField1;
     // End of variables declaration//GEN-END:variables
 }
